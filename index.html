@@ -8,18 +8,35 @@
     name="description"
     content="Footlab Turf - premium football turf bookings, gallery, pricing, and contact information in one scrollable page."
   />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="Favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="Favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="Favicon/favicon-16x16.png">
+  <link rel="manifest" href="Favicon/site.webmanifest">
+  <link rel="mask-icon" href="Favicon/android-chrome-512x512.png" color="#28de7b">
+  <link rel="shortcut icon" href="Favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#0b121f">
+  <meta name="msapplication-config" content="Favicon/browserconfig.xml">
+  <meta name="theme-color" content="#0b121f">
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <div class="container nav">
-      <a href="#home" class="logo">Footlab</a>
+      <a href="#home" class="logo-wrap" aria-label="Footlab home">
+        <img src="images/logo/logo.png" alt="Footlab logo" class="logo-img" />
+        <span class="logo-text">Footlab</span>
+      </a>
 
       <button class="menu-toggle" id="menuToggle" aria-label="Open Menu" aria-expanded="false">
         ☰
       </button>
 
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main">
         <a href="#home" class="active">Home</a>
         <a href="#about">About</a>
         <a href="#gallery">Gallery</a>
@@ -28,6 +45,17 @@
       </nav>
     </div>
   </header>
+
+  <div class="goal-animation" id="goalAnimation" aria-hidden="true">
+    <div class="net"></div>
+    <div class="ball"></div>
+  </div>
+
+  <div class="book-prompt" id="bookPrompt" role="dialog" aria-live="polite">
+    <span>🔥 Are you ready to book your match in 15 seconds?</span>
+    <button id="bookPromptButton">Yes, book now!</button>
+    <button id="dismissPrompt" aria-label="Dismiss booking prompt">Close</button>
+  </div>
 
   <main>
     <section
@@ -113,21 +141,32 @@
         </div>
 
         <div class="gallery-grid collapsible-gallery" id="galleryGrid">
-          <div class="card gallery-item"><img src="images/gallery/turf 1.jpeg" alt="Footlab turf view 1" /></div>
-          <div class="card gallery-item"><img src="images/gallery/turf 2.jpeg" alt="Footlab turf view 2" /></div>
-          <div class="card gallery-item"><img src="images/gallery/turf 3.jpeg" alt="Footlab turf view 3" /></div>
-          <div class="card gallery-item"><img src="images/gallery/turf 4.jpeg" alt="Footlab turf view 4" /></div>
-          <div class="card gallery-item"><img src="images/gallery/turf 5.jpeg" alt="Footlab turf view 5" /></div>
-          <div class="card gallery-item"><img src="images/gallery/turf 6.jpeg" alt="Footlab turf view 6" /></div>
-          <div class="card gallery-item"><img src="images/gallery/turf 7.jpeg" alt="Footlab turf view 7" /></div>
-          <div class="card gallery-item"><img src="images/gallery/turf 8.jpeg" alt="Footlab turf view 8" /></div>
-          <div class="card gallery-item"><img src="images/gallery/turf 9.jpeg" alt="Footlab turf view 9" /></div>
+          <div class="card gallery-item"><img src="images/gallery/turf 1.jpeg" alt="Footlab turf view 1" loading="lazy" /></div>
+          <div class="card gallery-item"><img src="images/gallery/turf 2.jpeg" alt="Footlab turf view 2" loading="lazy" /></div>
+          <div class="card gallery-item"><img src="images/gallery/turf 3.jpeg" alt="Footlab turf view 3" loading="lazy" /></div>
+          <div class="card gallery-item"><img src="images/gallery/turf 4.jpeg" alt="Footlab turf view 4" loading="lazy" /></div>
+          <div class="card gallery-item"><img src="images/gallery/turf 5.jpeg" alt="Footlab turf view 5" loading="lazy" /></div>
+          <div class="card gallery-item"><img src="images/gallery/turf 6.jpeg" alt="Footlab turf view 6" loading="lazy" /></div>
         </div>
 
-        <div class="center">
+        <div class="center gallery-actions">
           <button class="btn btn-primary" id="galleryToggle" type="button" aria-expanded="false">
             Show More
           </button>
+          <a href="#contact" class="btn btn-secondary" id="galleryRedirect">Book Your First Match</a>
+        </div>
+
+        <div class="turf-rules card" aria-label="Turf rules & standards">
+          <h3>Footlab Turf Rules</h3>
+          <ul>
+            <li>Absolutely no metal studs; turf shoes only.</li>
+            <li>No food or glass bottles on the pitch.</li>
+            <li>Respect teammates and opponents; zero-tolerance for rough behavior.</li>
+            <li>Booking must be confirmed 1 hour before kick-off.</li>
+            <li>Warm-up area available; maintain the turf surface.</li>
+            <li>Insurance and liability in plain text with each confirmation.</li>
+            <li>Referees and first-aid ready for competitive play.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -143,38 +182,38 @@
         </div>
 
         <div class="pricing-grid">
-          <article class="card pricing-card">
-            <h3>Casual Match</h3>
+          <article class="card pricing-card featured">
+            <div class="mini-badge">Turf Standard</div>
+            <h3>Match Hour</h3>
             <p class="price">Ksh 2,500 <span>/ hour</span></p>
             <ul>
-              <li>Ideal for friendly matches</li>
-              <li>Access to full playing turf</li>
-              <li>Suitable for small group bookings</li>
+              <li>30-minute warm-up & free goal post service</li>
+              <li>60-minute full turf access (non-peak rate)</li>
+              <li>LED floodlights, water station, changing room</li>
             </ul>
-            <a href="#contact" class="btn btn-primary">Book This</a>
-          </article>
-
-          <article class="card pricing-card featured">
-            <div class="mini-badge">Popular</div>
-            <h3>Team Training</h3>
-            <p class="price">Ksh 3,500 <span>/ session</span></p>
-            <ul>
-              <li>Best for organized team practice</li>
-              <li>Great for drills and structured sessions</li>
-              <li>Flexible scheduling options</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary">Book This</a>
+            <a href="#contact" class="btn btn-primary">Reserve Your Slot</a>
           </article>
 
           <article class="card pricing-card">
-            <h3>Private Event</h3>
-            <p class="price">Ksh 6,000 <span>/ package</span></p>
+            <h3>Team Block</h3>
+            <p class="price">Ksh 8,500 <span>/ 4 hours</span></p>
             <ul>
-              <li>For tournaments and special events</li>
-              <li>Longer reservation period</li>
-              <li>Suitable for group football activities</li>
+              <li>Consistent weekly booking discount</li>
+              <li>Coaches and physio priority line</li>
+              <li>Guaranteed turf prep before arrival</li>
             </ul>
-            <a href="#contact" class="btn btn-primary">Book This</a>
+            <a href="#contact" class="btn btn-primary">Book Now</a>
+          </article>
+
+          <article class="card pricing-card">
+            <h3>School Cup</h3>
+            <p class="price">Ksh 18,000 <span>/ day</span></p>
+            <ul>
+              <li>Full complex rental + referees area</li>
+              <li>Free advert board for sponsors</li>
+              <li>Safety mat installation included</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary">Inquire</a>
           </article>
         </div>
 
@@ -220,15 +259,15 @@
 
           <div class="card contact-form-card">
             <h2>Send a Booking Inquiry</h2>
-            <form class="contact-form">
+            <form class="contact-form" id="contactForm" action="#" method="post" novalidate>
               <div class="form-group">
                 <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" />
+                <input type="text" id="name" name="name" placeholder="Enter your name" required minlength="2" />
               </div>
 
               <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="Enter your number" />
+                <input type="tel" id="phone" name="phone" placeholder="Enter your number" required pattern="^\+?[0-9\s-]{9,15}$" />
               </div>
 
               <div class="form-group">
@@ -238,6 +277,8 @@
                   name="message"
                   rows="6"
                   placeholder="Tell us the date, time, or type of booking you need"
+                  required
+                  minlength="10"
                 ></textarea>
               </div>
 
